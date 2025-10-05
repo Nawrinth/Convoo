@@ -6,6 +6,7 @@ import cors from "cors"
 
 import authRoutes from "./routes/auth.route.js"
 import messageRoutes from "./routes/message.route.js"
+import connectionsRoutes from "./routes/connections.route.js"
 
 
 dotenv.config();
@@ -24,6 +25,7 @@ app.use(cors({
 
 app.use("/api/auth" , authRoutes)
 app.use("/api/messages" , messageRoutes)
+app.use("/api/connections" , connectionsRoutes)
 
 
 app.listen(PORT  , ()=>{

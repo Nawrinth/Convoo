@@ -17,8 +17,12 @@ const connectionSchema = new mongoose.Schema(
       enum: ["pending", "accepted", "blocked"],
       default: "pending",
     },
+    notification:{
+      type: Boolean,
+      default: true
+    }
   },
   { timestamps: true } // adds createdAt & updatedAt automatically
 );
 
-export const Connection = mongoose.model("Connection", connectionSchema);
+export default mongoose.model("Connection", connectionSchema);

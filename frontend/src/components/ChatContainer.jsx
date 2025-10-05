@@ -10,6 +10,7 @@ const ChatContainer = () => {
 
   
   useEffect(()=>{
+    
     getMessages(selectedUser._id);
   },[selectedUser._id , getMessages])
   
@@ -18,7 +19,7 @@ const ChatContainer = () => {
     
     if (isMessagesLoading) {
   return (
-      <div className={`overflow-hidden flex h-full md:max-w-[calc(100vw-350px)] flex-col w-full  text-gray-500 ${selectedUser?"":"hidden"} `}>
+      <div className={`overflow-hidden flex h-full  flex-col w-full  text-gray-500 ${selectedUser?"":"hidden"} `}>
 
     {/* Header */}
     <HeaderChat />
@@ -45,7 +46,7 @@ const ChatContainer = () => {
     <HeaderChat />
 
     {/* Empty message area */}
-      <div className="flex-1 overflow-y-auto p-4 sapce-y-4">
+      <div className="flex-1 overflow-y-auto p-4 sapce-y-4 ">
         {/* Messages will go here later */}
 
       </div>

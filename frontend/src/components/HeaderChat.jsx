@@ -15,7 +15,7 @@ const HeaderChat = () => {
             </button>
             <div className='flex  justify-between gap-4'>
                 <div className={"size-10 rounded-full"}>
-                     <img className='size-10 rounded-full ' src={user?.profilePic || avatarImg} alt="User avatar" />
+                     <img className='size-10 rounded-full object-cover' src={user?.profilePic || avatarImg} alt="User avatar" />
                         
                 </div>
                 <div className='flex flex-col justify-between'>

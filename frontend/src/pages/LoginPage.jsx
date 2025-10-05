@@ -39,7 +39,7 @@ const LoginPage = () => {
       {/* Left Side  */}
         <div className='flex  items-center justify-center w-full '>
           <div className='space-y-10 w-full '>
-            {/* Logo  */}
+            {/* Logo */}
             <div className='flex flex-col space-y-6 items-center justify-center h-full w-full'>
               <div className='flex gap-3 items-center'>
                   <div className='p-3 bg-primary/20 rounded-2xl hover:bg-primary/30 transition-colors duration-200'>
@@ -57,7 +57,7 @@ const LoginPage = () => {
             {/* Form Details  */}
             <form onSubmit={handleSubmit} className='flex items-center justify-center w-full'>
               <div className='form w-80 md:w-100 space-y-6'>
-                {/* Email  */}
+                {/* Email */}
                 <div className='flex flex-col gap-2'>
                   <label htmlFor="" className='text-gray-800 dark:text-gray-300 font-bold '>Email</label>
                   <div className='w-full border-1 border-gray-500 dark:border-gray-500 p-2 rounded-lg flex gap-4 px-2 items-center'>
@@ -76,13 +76,13 @@ const LoginPage = () => {
                     </button>
                   </div>
                 </div>
-                {/* SUBMIT BUTTON  */}
+                {/* SUBMIT BUTTON */}
                 <button
                   className={"w-full text-lg mt-10 bg-primary hover:scale-104 p-1.5  rounded-lg cursor-pointer font-semibold hover:opacity-80  text-white min-h-10 flex items-center justify-center transition-all duration-150"}
                   type='submit'
                   disabled={isLoggingIn}
                   >{isLoggingIn?<Loader className='animate-spin'/>:"Sign In"}</button>
-                {/* Login Navigation  */}
+                {/* Login Navigation */}
                 <p className='font-normal text-center'>Don’t have an account?
                   <span>{" "}</span>
                   <Link to={"/signup"} className='text-[#665fca] underline'>
@@ -96,7 +96,7 @@ const LoginPage = () => {
           
 
         </div>
-      {/* Right Side  */}
+      {/* Right Side */}
       <div className='hidden xl:flex flex-col gap-10 h-full items-center justify-center bg-white/20 dark:bg-black/10'>
           <AuthPageAnimation/>
           <div className='space-y-4 text-center mt-6'>

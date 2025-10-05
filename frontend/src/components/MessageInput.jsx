@@ -57,7 +57,7 @@ const MessageInput = () => {
   };
 
   return (
-    <div className="w-full bg-white/70 dark:bg-[#181818]">
+    <div className="w-full bg-white/70 dark:bg-[#18181880]">
       {/* Image Preview */}
       {image && (
         <div className="relative mb-2 flex gap-4  border dark:border-gray-300/20 border-gray-600/30 rounded-xl w-full p-4 overflow-hidden ">

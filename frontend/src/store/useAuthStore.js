@@ -5,7 +5,9 @@ import { errorTheme, successTheme } from "@/styles/ToastStyle.js"
 
 export const useAuthStore = create((set) => ({
     showProfileModal:false,
-    setShowProfileModal: () => set(state => ({ showProfileModal: !state.showProfileModal })),
+    toggleShowProfileModal: () => set(state => ({ showProfileModal: !state.showProfileModal })),
+    showSearchUser:false,
+    toggleShowSearchUser: () => set(state => ({ showSearchUser: !state.showSearchUser })),
     authUser:null,
     isSigningUp:false,
     isLoggingIn:false,
@@ -52,6 +54,7 @@ export const useAuthStore = create((set) => ({
         try {
             await axiosInstance.post("/api/auth/logout")
             set({authUser:null})
+            set({showSearchUser:false})
             toast.success("Logout successful", successTheme)
         } catch (error) {
             console.log("Error on logout", error.message)

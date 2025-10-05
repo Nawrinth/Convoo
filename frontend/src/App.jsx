@@ -3,7 +3,7 @@ import { Loader } from "lucide-react";
 import { useAuthStore } from "./store/useAuthStore";
 import { ThemeProvider } from "./context/ThemeProvider";
 import { Toaster } from "react-hot-toast";
-import { Routes, Route } from "react-router-dom";
+import { Routes, Route, Navigate } from "react-router-dom";
 
 import Layout from "./context/Layout";
 import LoginPage from "./pages/LoginPage";
@@ -20,7 +20,7 @@ const App = () => {
 
   if (isCheckingAuth && !authUser) {
     return (
-      <div className="flex items-center justify-center w-screen h-screen bg-background">
+      <div className="flex items-center justify-center w-screen h-screen bg-[#121212]">
         <Loader className="size-8 animate-spin" />
       </div>
     );
@@ -31,12 +31,13 @@ const App = () => {
       <Layout>
         <Routes>
           {/* Public routes */}
-          <Route path="/login" element={<LoginPage />} />
-          <Route path="/signup" element={<SignupPage />} />
+          <Route path="/login" element={authUser?<Navigate to="/chat" replace />:<LoginPage />} />
+          <Route path="/signup" element={authUser?<Navigate to="/chat" replace />:<SignupPage />} />
 
           {/* Private routes */}
-          <Route path="/chat" element={<ChatPage />} />
-          <Route path="/discover-people" element={<DiscoverPage />} />
+          <Route path="/" element={<Navigate to="/chat" replace />} />
+          <Route path="/chat" element={authUser?<ChatPage />:<Navigate to="/login" replace />} />
+          <Route path="/discover-people" element={authUser?<DiscoverPage />:<Navigate to="/login" replace />} />
         </Routes>
       </Layout>
       <Toaster />

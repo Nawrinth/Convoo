@@ -1,21 +1,66 @@
 import { create} from "zustand";
 import { axiosInstance } from "../lib/axios.js";
 import toast from "react-hot-toast";
-import { errorTheme } from "@/styles/ToastStyle.js";
+import { errorTheme, successTheme } from "@/styles/ToastStyle.js";
 
 export const useChatStore = create((set , get) => ({
     messages:[],
     users:[],
+    friends:[],
+    pending:[],
+    showNotificationsModal:false,
+    anyNotifications:null,
+    isChangesMade:true,
+    setIsChangesMade: (value) => set({isChangesMade:value}),
+    setAnyNotifications: (value) => set({anyNotifications:value}),
+    toggleShowNotificationsModal: () => set((state) => ({ showNotificationsModal: !state.showNotificationsModal })),
+    setAllToEmpty: () => set({messages:[], users:[], friends:[], pending:[]}),
+    getPendingUserId: async () =>{
+        try{
+            console.log("Fetching pending connections...");
+            const res = await axiosInstance.get("/api/connections/pending");
+            set({ pending: res.data });
+        } catch (error) {
+            console.error("Error fetching pending connections:", error);
+            toast.error("Failed to load pending connections", errorTheme);
+        } 
+    },
+    addConnection: async (toUserId) => {
+        try {
+            const currentPending = get().pending || [];
+            await axiosInstance.post("/api/connections", { toUserId });
+            // Optionally, you can update the pending list locally
+            set({ pending: [...currentPending, toUserId] });
+            toast.success("Connection request sent" , successTheme);
+        } catch (error) {
+            console.error("Error sending connection request:", error);
+            toast.error("Failed to send connection request", errorTheme);
+        }
+    },
     selectedUser:null,
     isUsersLoading:false,
     isMessagesLoading:false,
     onlineUsers:[],
-    getUsers: async () => {
+    getUsers: async (search = "") => {
         set({ isUsersLoading: true });
         try {
             console.log("Fetching users...");
-            const res = await axiosInstance.get("/api/messages/user");
-            set({ users: res.data });
+            const res = await axiosInstance.get(`/api/messages/user?search=${search}`);
+            // Ensure users is always an array
+            set({ users: Array.isArray(res.data) ? res.data : [] });
+        } catch (error) {
+            console.error("Error fetching users:", error);
+            toast.error("Failed to load users", errorTheme);
+        } finally {
+            set({ isUsersLoading: false });
+        }
+    },
+    getFriends: async () => {
+        set({ isUsersLoading: true });
+        try {
+            console.log("Fetching users...");
+            const res = await axiosInstance.get("/api/messages/friends");
+            set({ friends: res.data });
         } catch (error) {
             console.error("Error fetching users:", error);
             toast.error("Failed to load users", errorTheme);

@@ -68,8 +68,9 @@ const ChatContainer = () => {
         <HeaderChat />
         <div className="flex-1 p-4">Error loading messages</div>
         <div className="p-3 bg-background">
-          <MessageInput />
+        <MessageInput />
 S      </div>
+      </div>
     );
   }
 
@@ -112,4 +113,4 @@ S      </div>
     </div>
   );
 };
-export default ChatContainer;S
+export default ChatContainer;
